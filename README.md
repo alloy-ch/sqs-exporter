@@ -5,7 +5,7 @@ NOTE-zw: to update the modules dependencies:
 
 1. Check the upstream https://github.com/jmal98/sqs-exporter for new updates. If anything new, update this repo
 2. (if everything is okay) commit the changes to github
-3. `export SQS_EXPORTER_VERSION=0.1.0`, or whatever the new upstream version number
+3. `export SQS_EXPORTER_VERSION=0.2.0`, or whatever the new upstream version number
 4. `docker buildx build --allow security.insecure --push --platform linux/amd64,linux/arm64 --builder rcplus --tag zhaowde/sqs-exporter:$SQS_EXPORTER_VERSION --tag zhaowde/sqs-exporter:latest .`
 5. (for the command above, if the builder `rcplus` does not exist) `docker buildx create --bootstrap --name rcplus --driver docker-container --platform linux/amd64,linux/arm64 --use --buildkitd-flags '--allow-insecure-entitlement security.insecure'`
 
@@ -53,17 +53,17 @@ You can deploy this exporter using the [jmal98/sqs-exporter](https://hub.docker.
 If you run in AWS, the following will assume it's running with an IAM profile which will allow read access to SQS information.
 
 ```bash
-docker run -d -p 9384:9384 jmal98/sqs-exporter:0.1.0
+docker run -d -p 9384:9384 jmal98/sqs-exporter:0.2.0
 ```
 
 Use the following to pass the queue filtering environment variables to the docker container.
 
 ```bash
-docker run -d -e SQS_QUEUE_NAME_PREFIX='example_queue_prefix' -p 9384:9384 jmal98/sqs-exporter:0.1.0
+docker run -d -e SQS_QUEUE_NAME_PREFIX='example_queue_prefix' -p 9384:9384 jmal98/sqs-exporter:0.2.0
 ```
 
 If you would like to run the exporter with supplied environment configuration, the following will work both inside and outside of AWS.  This is useful if you desire to run the exporter externally.
 
 ```bash
-docker run -d -p 9384:9384 -e AWS_ACCESS_KEY_ID=<access key> -e AWS_SECRET_ACCESS_KEY=<secret key> -e AWS_REGION=<region>  jmal98/sqs-exporter:0.1.0
+docker run -d -p 9384:9384 -e AWS_ACCESS_KEY_ID=<access key> -e AWS_SECRET_ACCESS_KEY=<secret key> -e AWS_REGION=<region>  jmal98/sqs-exporter:0.2.0
 ```
